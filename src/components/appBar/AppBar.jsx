@@ -14,6 +14,8 @@ const AppBarStyled = styled.nav`
     background-color:lightblue;
         
     ul{
+        max-width:1000px;
+        margin:0 auto;
         display:flex;
         justify-content:space-between;
         padding:0.5rem 1rem;
@@ -36,6 +38,13 @@ const AppBarStyled = styled.nav`
     svg{
         width:2.0rem;
         height:2.0rem;
+    }
+
+    @media (min-width:600px)
+    {
+        li:first-child{
+            flex-basis:80%;
+        }
     }
 
 `;
