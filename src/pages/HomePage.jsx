@@ -1,4 +1,4 @@
-import AppBar from 'components/appBar/AppBar';
+
 import React from 'react';
 import styled from 'styled-components';
 import Logo from '../components/icons/Logo';
@@ -6,11 +6,11 @@ import Logo from '../components/icons/Logo';
 const HomePageStyles = styled.header`
 
 
-  div{
+  
     text-align:center;
     margin: 6rem auto;
-    width:480px;
-  }
+    width:380px;
+  
   .logo{
     width:80px;
   }
@@ -27,12 +27,10 @@ const HomePage = (props) => {
     return (
 
         <HomePageStyles>
-        <AppBar/>
-        <div>
+
         <Logo className="logo"/>
         <h1>Employee Manager</h1>
         <p>Focus on people and we'll focus on the paperwork</p>
-        </div>
       
         </HomePageStyles>
         

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import FormInput from '../components/forms/FormInput';
 import Button from '../components/buttons/Button';
 import {Link} from 'react-router-dom';
-import AppBar from 'components/appBar/AppBar';
+
 const RegisterPageStyles = styled.aside`
     width:380px;
     margin: 6rem auto 0;
@@ -37,7 +37,6 @@ const RegisterPageStyles = styled.aside`
 const RegisterPage = (props) => {
     return ( 
         <RegisterPageStyles>
-            <AppBar/>
             <header>
             <h1>
                 Unlimited Free Trial Sign up

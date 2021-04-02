@@ -25,7 +25,7 @@ const AppBarStyled = styled.nav`
     }
     li:first-child
     {
-        flex-basis:75%;
+        flex-basis:66%;
     }
     .link{
         color:white;

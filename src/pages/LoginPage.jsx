@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from '../components/buttons/Button';
 import FormInput from '../components/forms/FormInput';
 import {Link} from 'react-router-dom';
-import AppBar from '../components/appBar/AppBar';
+
 
 const LoginPageStyes=styled.aside`
  width:380px;
@@ -37,7 +37,6 @@ const LoginPage = (props) => {
     return ( 
         
         <LoginPageStyes>
-        <AppBar/>
         <header>
             <h1>
                 Login Page
