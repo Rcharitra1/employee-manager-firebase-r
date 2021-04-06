@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
+import {Redirect} from 'react-router-dom';
+
+import firebaseApp from '../firebase/firebaseConfig.js';
 import Button from '../components/buttons/Button';
 import FormInput from '../components/forms/FormInput';
 import {Link} from 'react-router-dom';
+
 
 
 const LoginPageStyes=styled.aside`
@@ -31,27 +35,68 @@ const LoginPageStyes=styled.aside`
     .links:hover{
         border-bottom:1px solid blue;
     }
+    .error{
+        margin:0;
+        padding:0;
+        color:red;
+        font-size:0.8rem;
+    }
 `
 
 const LoginPage = (props) => {
-    return ( 
+
+    const [email, setEmail]= useState('');
+    const [password, setPassword]=useState('');
+    const [errors, setError]=useState('');  
+    const [isValid, setIsValid]=useState(false); 
+    
+    const handleClick = (e) => 
+    {
         
-        <LoginPageStyes>
-        <header>
-            <h1>
-                Login Page
-            </h1>
-        </header> 
-        <FormInput label="email address" type="email"/>
-        <FormInput label="password" type="password"/>
+        firebaseApp.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential)=> {
+            setIsValid(true);
+            
+            
+        }).catch(err=> setError(err))
+    }
 
-        <Button label="Login" uistyle="login"/>
+    if(isValid)
+    {
+        return   <Redirect to='/dashboard'/>
 
-        <p>Not a member? <Link className="links" to="/register">Register</Link></p>
+    }else
+    {
+        return ( 
 
-        </LoginPageStyes>
         
-        );
+        
+            <LoginPageStyes>
+            <header>
+                <h1>
+                    Login
+                </h1>
+            </header> 
+            <FormInput label="email address" type="email" onChange={(e)=> setEmail(e.target.value.trim
+                ())}/>
+                {errors && errors.code===('auth/invalid-email') && <p class="error">{errors.message}</p>}
+                
+            <FormInput label="password" type="password" onChange={(e)=> setPassword(e.target.value.trim())}/>
+            {errors && errors.code===('auth/wrong-password') && <p class="error">{errors.message}</p>}
+            
+    
+            <Button label="Login" uistyle="login" onClick={handleClick}/>
+    
+            <p>Not a member? <Link className="links" to="/register">Register</Link></p>
+            </LoginPageStyes>
+            
+            );
+
+    }
+    
+
+       
+
 }
 
  

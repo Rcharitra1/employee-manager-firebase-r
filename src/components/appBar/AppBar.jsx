@@ -4,28 +4,23 @@ import {Link} from 'react-router-dom';
 import Logo from '../icons/Logo';
 
 const AppBarStyled = styled.nav`
-    box-shadow:0 0 3px 1px grey;
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
+    box-shadow:0 0 5px 1px grey;
+    z-index:3;
+    position:relative;
     font-weight:200;
-
     background-color:lightblue;
-        
     ul{
-        max-width:1000px;
-        margin:0 auto;
         display:flex;
         justify-content:space-between;
-        padding:0.5rem 1rem;
+        padding:0.5rem 1.75rem;
         align-items:center;
         
 
     }
     li:first-child
     {
-        flex-basis:66%;
+        
+        flex-basis:50%;
     }
     .link{
         color:white;
@@ -43,6 +38,13 @@ const AppBarStyled = styled.nav`
     @media (min-width:600px)
     {
         li:first-child{
+            flex-basis:66%;
+        }
+    }
+
+    @media (min-width:1000px)
+    {
+        li:first-child{
             flex-basis:80%;
         }
     }
@@ -56,6 +58,7 @@ const AppBar = () => {
             <li><Link to="/"><Logo/></Link></li>
             <li><Link className="link" to="/login">Login</Link></li>
             <li><Link className="link" to="/register">Register</Link></li>
+            <li><Link to="/dashboard" className="link">Dashboard</Link></li>
         </ul>
         </AppBarStyled>
       );
