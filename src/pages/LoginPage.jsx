@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import styled from "styled-components";
 import {Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+
 
 import firebaseApp from '../firebase/firebaseConfig.js';
+import AuthContext from '../auth/AuthContext.jsx';
 import Button from '../components/buttons/Button';
 import FormInput from '../components/forms/FormInput';
-import {Link} from 'react-router-dom';
+
 
 
 
@@ -45,25 +48,26 @@ const LoginPageStyes=styled.aside`
 
 const LoginPage = (props) => {
 
+    const auth = useContext(AuthContext)
     const [email, setEmail]= useState('');
     const [password, setPassword]=useState('');
     const [errors, setError]=useState('');  
-    const [isValid, setIsValid]=useState(false); 
+    const [isValid, setIsValid]=useState(false);
     
     const handleClick = (e) => 
     {
-        
         firebaseApp.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential)=> {
             setIsValid(true);
-            
+            auth.isUser=true;
+            auth.uid=userCredential.user.uid;       
             
         }).catch(err=> setError(err))
     }
 
     if(isValid)
     {
-        return   <Redirect to='/dashboard'/>
+        return   (<Redirect to='/dashboard'/>)
 
     }else
     {
@@ -79,10 +83,10 @@ const LoginPage = (props) => {
             </header> 
             <FormInput label="email address" type="email" onChange={(e)=> setEmail(e.target.value.trim
                 ())}/>
-                {errors && errors.code===('auth/invalid-email') && <p class="error">{errors.message}</p>}
+                {errors && errors.code===('auth/invalid-email') && <p className="error">{errors.message}</p>}
                 
             <FormInput label="password" type="password" onChange={(e)=> setPassword(e.target.value.trim())}/>
-            {errors && errors.code===('auth/wrong-password') && <p class="error">{errors.message}</p>}
+            {errors && errors.code===('auth/wrong-password') && <p className="error">{errors.message}</p>}
             
     
             <Button label="Login" uistyle="login" onClick={handleClick}/>

@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+
 import Logo from '../icons/Logo';
+
 
 const AppBarStyled = styled.nav`
     box-shadow:0 0 5px 1px grey;
@@ -13,14 +15,12 @@ const AppBarStyled = styled.nav`
         display:flex;
         justify-content:space-between;
         padding:0.5rem 1.75rem;
-        align-items:center;
-        
-
+        align-items:center;       
     }
     li:first-child
     {
         
-        flex-basis:50%;
+        flex-basis:66%;
     }
     .link{
         color:white;
@@ -30,6 +30,8 @@ const AppBarStyled = styled.nav`
         border-bottom:1px solid whitesmoke;
         color:whitesmoke;
     }
+
+    
     svg{
         width:2.0rem;
         height:2.0rem;
@@ -38,30 +40,30 @@ const AppBarStyled = styled.nav`
     @media (min-width:600px)
     {
         li:first-child{
-            flex-basis:66%;
+            flex-basis:76%;
         }
     }
 
     @media (min-width:1000px)
     {
         li:first-child{
-            flex-basis:80%;
+            flex-basis:82%;
         }
     }
-
 `;
 
 const AppBar = () => {
-    return (
-        <AppBarStyled>
-        <ul>
-            <li><Link to="/"><Logo/></Link></li>
-            <li><Link className="link" to="/login">Login</Link></li>
-            <li><Link className="link" to="/register">Register</Link></li>
-            <li><Link to="/dashboard" className="link">Dashboard</Link></li>
-        </ul>
-        </AppBarStyled>
-      );
+   
+        return (
+            <AppBarStyled>
+            <ul>
+                <li><Link to="/"><Logo/></Link></li>
+                <li><Link to="/dashboard" className="link">Dashboard</Link></li>
+            </ul>
+            </AppBarStyled>
+          );
+    
+    
 }
  
 export default AppBar;

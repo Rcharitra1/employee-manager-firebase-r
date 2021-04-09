@@ -1,5 +1,8 @@
+
 import React, {useContext, useState} from 'react';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import AuthContext from '../../auth/AuthContext';
 
  
 
@@ -38,8 +41,15 @@ height: calc(100vh - 64px);
 `
 const DashBoard = (props) => {
    
-  
-     return (
+    const auth = useContext(AuthContext);
+    console.log("Dashboard render")
+    console.log(auth);
+    if(!auth.isUser)
+    {
+        return <Redirect to="/login"></Redirect>
+    }else
+    {
+        return (
             <DashBoardStyles>              
                  <SideBar>
                 <header>
@@ -61,6 +71,9 @@ const DashBoard = (props) => {
     
         </DashBoardStyles>
      )     
+    }
+  
+     
     
         
 }
