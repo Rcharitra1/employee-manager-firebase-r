@@ -12,7 +12,7 @@ import FormInput from '../components/forms/FormInput';
 
 
 
-const LoginPageStyes=styled.aside`
+const LoginPageStyles=styled.aside`
  width:380px;
     margin: 6rem auto 0;
     header{
@@ -46,62 +46,71 @@ const LoginPageStyes=styled.aside`
     }
 `
 
+
+
 const LoginPage = (props) => {
-
-    const auth = useContext(AuthContext)
-    const [email, setEmail]= useState('');
-    const [password, setPassword]=useState('');
-    const [errors, setError]=useState('');  
-    const [isValid, setIsValid]=useState(false);
+   const auth = useContext(AuthContext)
+   const [email, setEmail]=useState('charitra8890@gmail.com')
+   const[password, setPassword] = useState('123456')
+   const [isValid, setIsValid] = useState(false);
+   const [errors, setErrors] = useState('');
+   
+        console.log('render login')
+        console.log(errors)
     
-    const handleClick = (e) => 
-    {
-        firebaseApp.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential)=> {
-            setIsValid(true);
-            auth.isUser=true;
-            auth.uid=userCredential.user.uid;       
-            
-        }).catch(err=> setError(err))
-    }
+     
+     const handleClick = (e) =>{
+       firebaseApp.auth().signInWithEmailAndPassword(email, password)
+       .then(userCredential=>{
+           // email and password input
+           auth.isUser = true
+           setIsValid(true)
+           auth.uid=userCredential.user.uid;    
+       })
+       .catch(error=>{
+          console.log(error.code)
+          console.log(error.message)
+          setErrors(error);
+       })
+      
 
-    if(isValid)
-    {
-        return   (<Redirect to='/dashboard'/>)
+     }
 
-    }else
-    {
-        return ( 
-
-        
-        
-            <LoginPageStyes>
-            <header>
-                <h1>
-                    Login
-                </h1>
-            </header> 
-            <FormInput label="email address" type="email" onChange={(e)=> setEmail(e.target.value.trim
-                ())}/>
-                {errors && errors.code===('auth/invalid-email') && <p className="error">{errors.message}</p>}
-                
-            <FormInput label="password" type="password" onChange={(e)=> setPassword(e.target.value.trim())}/>
-            {errors && errors.code===('auth/wrong-password') && <p className="error">{errors.message}</p>}
-            
-    
-            <Button label="Login" uistyle="login" onClick={handleClick}/>
-    
-            <p>Not a member? <Link className="links" to="/register">Register</Link></p>
-            </LoginPageStyes>
-            
-            );
-
-    }
     
 
-       
+   // conditional rendering 
+   if(isValid){
+        return <Redirect to="/dashboard"/>
+   }else{
+      return (
+         <LoginPageStyles>
+            <header><h1>Login</h1></header>
+            <FormInput type="text" label="email" onChange={(e)=> setEmail(e.target.value.trim())}/>
 
+            {errors && errors.code==='auth/invalid-email' && <p className="error">{errors.message}</p>}
+            {errors && errors.code==='auth/user-not-found' && <p className="error">{errors.message}</p>}
+            <FormInput type="password" label="password" onChange={(e)=> setPassword(e.target.value.trim())}/>
+
+            {errors && errors.code==='auth/weak-password' && <p className="error">{errors.message}</p>}
+            {errors && errors.code==='auth/wrong-password' && <p className="error">{errors.message}</p>}
+            <Button label="login" uistyle="login"  onClick={handleClick}/>
+            <p>Already a member? <Link className="links"  to="/Register">Register</Link></p>
+         </LoginPageStyles>
+
+      );
+   }
 }
 
- 
 export default LoginPage;
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
