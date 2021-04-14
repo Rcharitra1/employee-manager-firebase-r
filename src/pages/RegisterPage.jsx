@@ -1,4 +1,4 @@
-import React, {useState, useContext}from 'react';
+import React, {useState}from 'react';
 import firebaseApp from '../firebase/firebaseConfig';
 import styled from 'styled-components';
 import FormInput from '../components/forms/FormInput';

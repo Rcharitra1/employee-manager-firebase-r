@@ -1,24 +1,19 @@
 import firebase from 'firebase';
-import 'firebase/auth';
+import 'firebase/auth'
 import 'firebase/firestore';
 import 'firebase/storage';
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyBdqYEML1dt8HeV1Xk0E76N5ui3xaTK5Sc",
-    authDomain: "employee-manager-rc.firebaseapp.com",
-    projectId: "employee-manager-rc",
-    storageBucket: "employee-manager-rc.appspot.com",
-    messagingSenderId: "59335524900",
-    appId: "1:59335524900:web:e8237936911060ec63ceb1",
-    measurementId: "G-8RM43NXK9Y"
-  };
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBYIHbZqFeJv5K2ZT4GKoDS4-C6RTDHY5g",
+        authDomain: "employee-manager-changed.firebaseapp.com",
+        projectId: "employee-manager-changed",
+        storageBucket: "employee-manager-changed.appspot.com",
+        messagingSenderId: "1045676586480",
+        appId: "1:1045676586480:web:69f494a13fbc5b81b95935",
+        measurementId: "G-R0X000SEHH"
+      };
 
 
-  //adds configs to initialize;
-  const firebaseApp = firebase.initializeApp(firebaseConfig);
+      const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-
-
-  export default firebaseApp;
-
-  
+      export default firebaseApp;

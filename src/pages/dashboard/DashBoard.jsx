@@ -1,8 +1,11 @@
-
-import React, {useContext, useState} from 'react';
-import { Redirect } from 'react-router-dom';
+import React, {useContext} from 'react';
+import { Redirect, Link, useRouteMatch, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import AuthContext from '../../auth/AuthContext';
+import ViewAllPanel from '../panels/ViewAllPanel';
+import AddPanel from '../panels/AddPanel';
+import EditPanel from '../panels/EditPanel';
+import DeletePanel from '../panels/DeletePanel';
 
  
 
@@ -32,6 +35,17 @@ li{
     font-size: 12px;
     margin-bottom: 0.35rem;
 }
+a{
+    text-decoration:none;
+    font-size:14px;
+}
+a:hover{
+    text-decoration:underline;
+}
+p{
+    font-size:1rem;
+}
+
 `
 
 const Panels = styled.aside `  
@@ -42,8 +56,9 @@ height: calc(100vh - 64px);
 const DashBoard = (props) => {
    
     const auth = useContext(AuthContext);
-    console.log("Dashboard render")
-    console.log(auth);
+    // console.log("Dashboard render")
+    // console.log(auth);
+    const {path, url} = useRouteMatch();
     if(!auth.isUser)
     {
         return <Redirect to="/login"></Redirect>
@@ -58,15 +73,20 @@ const DashBoard = (props) => {
                 </header>
            
             <ul>
-            <li>view all</li>
-            <li>add new employee</li>
-            <li>edit an employee</li>
-            <li>delete an employee</li>
+            <li><Link to={`${url}`}>View All</Link></li>
+            <li><Link to={`${url}/add`}>Add Content</Link></li>
+            <li><Link to={`${url}/edit`}>Edit Content</Link></li>
+            <li><Link to={`${url}/delete`}>Remove Content</Link></li>
               
                 </ul>
             </SideBar>
             <Panels>
-                
+                <Switch>
+                    <Route exact path={`${path}`}><ViewAllPanel/></Route>
+                    <Route path={`${path}/edit`}><EditPanel/></Route>
+                    <Route path={`${path}/add`}><AddPanel/></Route>
+                    <Route exact path={`${path}/delete`}><DeletePanel/></Route>
+                </Switch>
             </Panels>   
     
         </DashBoardStyles>

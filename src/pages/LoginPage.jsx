@@ -3,11 +3,11 @@ import styled from "styled-components";
 import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
-
 import firebaseApp from '../firebase/firebaseConfig.js';
 import AuthContext from '../auth/AuthContext.jsx';
 import Button from '../components/buttons/Button';
 import FormInput from '../components/forms/FormInput';
+
 
 
 
@@ -50,13 +50,12 @@ const LoginPageStyles=styled.aside`
 
 const LoginPage = (props) => {
    const auth = useContext(AuthContext)
-   const [email, setEmail]=useState('charitra8890@gmail.com')
+   const [email, setEmail]=useState('test@user.com')
    const[password, setPassword] = useState('123456')
    const [isValid, setIsValid] = useState(false);
    const [errors, setErrors] = useState('');
    
         console.log('render login')
-        console.log(errors)
     
      
      const handleClick = (e) =>{
